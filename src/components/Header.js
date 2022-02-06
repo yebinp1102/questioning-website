@@ -16,7 +16,6 @@ export const Header = () => {
   return (
     <Container>
       <Wrap>
-
         <Logo>
           <FlareIcon /> <span>Questioning</span>
         </Logo>
@@ -70,7 +69,7 @@ const Logo =styled.div`
   color: brown;
 
   span{
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: bold;
   }
 
@@ -81,14 +80,15 @@ const Logo =styled.div`
 
 const MenuIcons = styled.ul`
   display: flex;
+  align-items: center;
   
   li{
-    margin-right: 20px;
+    margin-right: 10px;
     color: brown;
     cursor: pointer;
 
     .MuiSvgIcon-root{
-      font-size: 2rem;
+      font-size: 1.5rem;
       transition: all .1s ease-in;
     }
 
@@ -96,11 +96,15 @@ const MenuIcons = styled.ul`
       color: #fff;
     }
   }
+  @media (max-width: 768px){
+    display: none;
+  }
+
 `;
 
 const SearchBar = styled.div`
   border: 1px solid #fff;
-  padding: 0 10px;
+  padding: 0 5px;
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -129,11 +133,15 @@ const RightMenus = styled.div`
   align-items: center;
 
   .MuiSvgIcon-root{
-    margin-right: 20px;
+    margin-right: 10px;
     color: brown;
     cursor: pointer;
-    font-size: 2rem;
+    font-size: 1.5rem;
     transition: all .1s ease-in;
+
+    @media (max-width: 768px){
+      display: none;
+    }
   }
 
   .MuiSvgIcon-root:hover{
@@ -153,5 +161,6 @@ const RightMenus = styled.div`
   button:hover{
     transform: scale(1.02);
   }
+
   
 `;
