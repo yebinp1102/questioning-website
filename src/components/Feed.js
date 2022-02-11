@@ -3,10 +3,21 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../redux/actions/userSlice';
 import { Avatar } from '@mui/material';
+import { db } from '../firebase/firebase';
 import Post from './Post';
 
 export const Feed = () => {
   const user = useSelector(selectUser);
+  const [post, setPost] = useState([]);
+
+  useEffect(()=>{
+    db.collection("questions").orderBy('timestamp','desc').onSnapshot(snapshot=> setPost(snapshot.docs.map(
+      (doc)=>(({
+        id: doc.id,
+        question: doc.data(),
+      }))
+    )))
+  },[])
 
 
   return (
@@ -18,7 +29,16 @@ export const Feed = () => {
         </User>
         <h3>What do you want to ask or share?</h3>
       </MyFeed>
-      <Post />
+      {post.map( ({id,question}) => (
+        <Post 
+          key={id}
+          Id={id}
+          image={question.imageUrl}
+          question={question.question}
+          timestamp={question.timestamp}
+          askUser={question.user}
+        />
+      ) )}
     </Container>
   );
 };

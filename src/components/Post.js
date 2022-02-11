@@ -1,32 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { Avatar } from '@mui/material';
 
-const Post = () => {
+const Post = ({key, Id, image, question, timestamp, askUser}) => {
+
   return (
     <OthersFeed>
         <UserInfo>
-          <AccountCircleIcon />
+          <Avatar src={askUser.photo} />
           <UserDetail>
-            <h5>Joon Lee</h5>
-            <p>ESL Instructor (2019-present)</p>
+            <h5>{askUser.displayName ? askUser.displayName : askUser.email}</h5>
+            <p>{new Date(timestamp?.toDate()).toLocaleString()}</p>
           </UserDetail>
         </UserInfo>
         <Contents>
-          <h4>Can you tell me 3 ranadom things about South Korea?</h4>
-          <p>Most Koreans regret not being able to speak English after 
-            putting in almost a decade of studying it.
-            My cousins both have advanced degrees in 
-            English from Korea, lived in the states with
-            me for a few years, and still can’t speak English all that well</p>
+          <h4>{question}</h4>
         </Contents>
         <ContentImage>
-          <img src='https://www.90daykorean.com/wp-content/uploads/2015/07/Community-Korea-Language-Exchange-in-Gangnam.jpg' alt="friends" />
+          <img src={image} alt="friends" />
         </ContentImage>
         <UIs>
           <RightUIs>
@@ -37,6 +33,7 @@ const Post = () => {
             <div><ChatBubbleIcon /> 150</div>
           </RightUIs>
           <LeftUIs>
+            <button className='answer'>Answer</button>
             <MoreHorizIcon />
           </LeftUIs>
         </UIs>
@@ -47,6 +44,7 @@ const Post = () => {
 export default Post;
 
 const OthersFeed = styled.div`
+  margin-bottom: 20px;
   background-color: #fff;
   border: 1px solid lightgray;
   border-radius: 5px;
@@ -73,6 +71,7 @@ const UserInfo = styled.div`
 `;
 
 const UserDetail = styled.div`
+  margin-left: 10px;
   h5{
     margin-bottom: 5px;
   }
@@ -117,6 +116,7 @@ const UIs = styled.div`
 
 const RightUIs = styled.div`
   display: flex;
+  align-items: center;
 
   div{
     display: flex;
@@ -132,4 +132,14 @@ const RightUIs = styled.div`
   }
 `;
 
-const LeftUIs = styled(RightUIs)``;
+const LeftUIs = styled(RightUIs)`
+  .answer{
+    border: none;
+    background-color: brown;
+    padding: 5px;
+    border-radius: 5px;
+    color: #fff;
+    margin-right: 8px;
+    cursor: pointer;
+  }
+`;
