@@ -5,14 +5,20 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../redux/actions/userSlice';
+import { Avatar } from '@mui/material';
+import Modal from 'react-modal/lib/components/Modal';
 
 export const Feed = () => {
+  const user = useSelector(selectUser);
+
   return (
     <Container>
       <MyFeed>
         <User>
-          <AccountCircleIcon />
-          <span>Gabby Park</span>
+          <Avatar src={user.photo} />
+          <span>{user.displayName}</span>
         </User>
         <h3>What do you want to ask or share?</h3>
       </MyFeed>
@@ -67,14 +73,14 @@ const MyFeed = styled.div`
   display: flex;
   flex-direction: column;
   color: #888;
-  
+
   &:hover{
     border: 1px solid brown;
   }
 
-  .MuiSvgIcon-root{
-    margin-right: 10px;
-    color: pink;
+  .MuiAvatar-root{
+    transform: scale(0.7);
+    z-index: 1;
   }
 `;
 
